@@ -21,7 +21,7 @@ export default function Contact() {
         <section className="relative w-full bg-black pt-15 pb-20">
             <div className="absolute z-0 w-full h-full top-0 left-0">
                 <LetterGlitch
-                    glitchColors={["#0924aa", "#4b68fb", "#7d7d7d"]}
+                    glitchColors={["#2f6e89", "#0f0d2b", "#454545"]}
                     glitchSpeed={50}
                     centerVignette={true}
                     outerVignette={true}
@@ -36,15 +36,6 @@ export default function Contact() {
 
                 {/* Links de contacto - solo iconos */}
                 <div className="flex items-center gap-8">
-                    {/* Email */}
-                    <a
-                        href="mailto:hola@devshore.com"
-                        className="group hover:text-white transition-colors duration-300"
-                        aria-label="Email"
-                    >
-                        <MailIcon />
-                    </a>
-
                     {/* Instagram */}
                     <a
                         href="https://instagram.com/dev.shore"
