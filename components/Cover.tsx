@@ -1,9 +1,10 @@
 import PixelBlast from '@/components/PixelBlast';
+import ColorBends from '@/components/ColorBends';
 import TextType from '@/components/TextType';
 
 export default function Cover() {
     return (
-        <section
+        <div
             className="relative w-full min-h-screen bg-black overflow-hidden"
             aria-label="Hero section con animación de texto"
         >
@@ -14,32 +15,25 @@ export default function Cover() {
                 <TextType
                     className="text-gray-100 font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl drop-shadow-2xl"
                     as="h1"
-                    text={["Creatividad", "Flow", "DevShore"]}
+                    text={["Innovación", "Transformación Digital", "Dev Shore"]}
                     typingSpeed={75}
                     pauseDuration={1500}
                     showCursor={true}
                     cursorCharacter="|"
                 />
             </div>
-            <PixelBlast
-                className="min-h-screen w-full"
-                variant="circle"
-                pixelSize={6}
-                color="#1166ee"
-                patternScale={2}
-                patternDensity={1.2}
-                pixelSizeJitter={0}
-                enableRipples
-                rippleSpeed={0.4}
-                rippleThickness={0.12}
-                rippleIntensityScale={1.5}
-                liquid
-                liquidStrength={0.12}
-                liquidRadius={1.2}
-                liquidWobbleSpeed={5}
-                speed={0.6}
-                edgeFade={0.25}
+            <ColorBends
+                colors={["#0924aa", "#4b68fb", "#2a2a2c"]}
+                rotation={0}
+                speed={0.2}
+                scale={1}
+                frequency={1}
+                warpStrength={1}
+                mouseInfluence={1}
+                parallax={0.6}
+                noise={0.3}
+                transparent
             />
-        </section>
+        </div>
     )
 }
