@@ -5,7 +5,7 @@ import TextType from '@/components/TextType';
 export default function Cover() {
     return (
         <div
-            className="relative w-full min-h-screen bg-black overflow-hidden"
+            className="relative w-full h-screen bg-black overflow-hidden"
             aria-label="Hero section con animación de texto"
         >
             <div
@@ -23,6 +23,7 @@ export default function Cover() {
                 />
             </div>
             <ColorBends
+                className="absolute inset-0 w-full h-full"
                 colors={["#0924aa", "#4b68fb", "#2a2a2c"]}
                 rotation={0}
                 speed={0.2}
