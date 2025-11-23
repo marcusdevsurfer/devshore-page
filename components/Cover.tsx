@@ -1,4 +1,3 @@
-import PixelBlast from '@/components/PixelBlast';
 import ColorBends from '@/components/ColorBends';
 import TextType from '@/components/TextType';
 
