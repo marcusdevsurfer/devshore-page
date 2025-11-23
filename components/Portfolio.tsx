@@ -1,5 +1,3 @@
-'use client';
-
 const projects = [
     {
         id: 1,
@@ -24,44 +22,37 @@ export default function Portfolio() {
     return (
         <section className="relative w-full bg-black px-4 py-32">
             <div className="max-w-5xl mx-auto">
-                {/* Título */}
                 <div className="mb-20 text-center">
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
                         Proyectos
                     </h2>
                     <div className="w-12 h-px bg-gray-700 mx-auto" />
                 </div>
-
-                {/* Proyecto destacado */}
                 <div className="max-w-3xl mx-auto">
                     {projects.map((project) => (
-                        <div 
+                        <div
                             key={project.id}
                             className="group relative border border-gray-800 p-10 md:p-12 transition-all duration-300 hover:border-gray-600"
                         >
-                            {/* Año */}
                             <div className="absolute top-8 right-8">
                                 <span className="text-xs text-gray-600">
                                     {project.year}
                                 </span>
                             </div>
-
-                            {/* Contenido */}
                             <div className="space-y-6">
                                 <h3 className="text-2xl md:text-3xl font-medium text-gray-200 group-hover:text-white transition-colors duration-300">
                                     {project.title}
                                 </h3>
-                                
+
                                 <p className="text-base text-gray-400 leading-relaxed">
                                     {project.description}
                                 </p>
 
-                                {/* Características principales */}
                                 <div className="pt-4">
                                     <h4 className="text-sm text-gray-500 mb-3 uppercase tracking-wider">Características</h4>
                                     <ul className="space-y-2">
                                         {project.features.map((feature, index) => (
-                                            <li 
+                                            <li
                                                 key={index}
                                                 className="text-sm text-gray-500 flex items-center gap-2"
                                             >
@@ -72,10 +63,9 @@ export default function Portfolio() {
                                     </ul>
                                 </div>
 
-                                {/* Tech stack */}
                                 <div className="flex flex-wrap gap-2 pt-4">
                                     {project.tech.map((tech) => (
-                                        <span 
+                                        <span
                                             key={tech}
                                             className="text-xs text-gray-600 border border-gray-800 px-3 py-1"
                                         >
@@ -83,11 +73,9 @@ export default function Portfolio() {
                                         </span>
                                     ))}
                                 </div>
-
-                                {/* Link del proyecto */}
                                 {project.link && (
                                     <div className="pt-4">
-                                        <a 
+                                        <a
                                             href={project.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -101,8 +89,6 @@ export default function Portfolio() {
                                     </div>
                                 )}
                             </div>
-
-                            {/* Línea decorativa en hover */}
                             <div className="absolute bottom-0 left-0 w-0 h-px bg-gray-600 group-hover:w-full transition-all duration-300" />
                         </div>
                     ))}
