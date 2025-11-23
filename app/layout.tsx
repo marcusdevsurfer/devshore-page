@@ -8,7 +8,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "DevShore",
+  title: "Dev-Shore",
   description: "Pagina oficial de DevShore",
 };
 

@@ -21,16 +21,17 @@ export default function Contact() {
         <section className="relative w-full bg-black pt-15 pb-20">
             <div className="absolute z-0 w-full h-full top-0 left-0">
                 <LetterGlitch
-                    glitchColors={["#2f6e89", "#0f0d2b", "#454545"]}
+                    glitchColors={["#1e40af", "#1a1a1a", "#3a3a3a"]}
                     glitchSpeed={50}
                     centerVignette={true}
                     outerVignette={true}
                     smooth={true}
+                    characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789"
                 />
             </div>
             <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[400px] gap-8">
                 {/* Título minimalista */}
-                <h2 className="text-2xl md:text-3xl text-gray-300">
+                <h2 className="text-2xl md:text-4xl text-gray-300">
                     Contacto
                 </h2>
 
