@@ -67,7 +67,12 @@ export default function Portfolio() {
                                     {project.tech.map((tech) => (
                                         <span
                                             key={tech}
-                                            className="text-xs text-gray-600 border border-gray-800 px-3 py-1"
+                                            className="text-xs text-gray-400 px-3 py-1 bg-linear-to-r from-white/20 to-blue-950/20 border border-transparent bg-clip-padding"
+                                            style={{
+                                                backgroundImage: 'linear-gradient(black, black), linear-gradient(to right, #4b5563, #0f172a)',
+                                                backgroundOrigin: 'border-box',
+                                                backgroundClip: 'padding-box, border-box'
+                                            }}
                                         >
                                             {tech}
                                         </span>
