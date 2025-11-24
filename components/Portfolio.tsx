@@ -34,15 +34,15 @@ export default function Portfolio() {
                             key={project.id}
                             className="group relative border border-gray-800 p-10 md:p-12 transition-all duration-300 hover:border-gray-600"
                         >
-                            <div className="absolute top-8 right-8">
-                                <span className="text-xs text-gray-600">
-                                    {project.year}
-                                </span>
-                            </div>
                             <div className="space-y-6">
-                                <h3 className="text-2xl md:text-3xl font-medium text-gray-200 group-hover:text-white transition-colors duration-300">
-                                    {project.title}
-                                </h3>
+                                <div className="flex items-start md:items-center justify-between gap-4">
+                                    <h3 className="text-2xl md:text-3xl font-medium text-gray-200 group-hover:text-white transition-colors duration-300">
+                                        {project.title}
+                                    </h3>
+                                    <span className="text-xs text-gray-600 shrink-0">
+                                        {project.year}
+                                    </span>
+                                </div>
 
                                 <p className="text-base text-gray-400 leading-relaxed">
                                     {project.description}
