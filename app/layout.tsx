@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+      style={{ scrollBehavior: "smooth" }}
         className={`${syne.variable} font-sans antialiased`}
       >
         {children}

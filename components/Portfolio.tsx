@@ -22,17 +22,18 @@ export default function Portfolio() {
     return (
         <section className="relative w-full bg-black px-4 py-32">
             <div className="max-w-5xl mx-auto">
-                <div className="mb-20 text-center">
+                <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
                         Proyectos
                     </h2>
                     <div className="w-12 h-px bg-gray-700 mx-auto" />
                 </div>
                 <div className="max-w-3xl mx-auto">
-                    {projects.map((project) => (
+                    {projects.map((project, index) => (
                         <div
                             key={project.id}
-                            className="group relative border border-gray-800 p-10 md:p-12 transition-all duration-300 hover:border-gray-600"
+                            className="group relative border border-gray-800 p-10 md:p-12 transition-all hover:border-gray-600 hover:shadow-lg hover:shadow-blue-500/10 animate-in fade-in slide-in-from-bottom-8 duration-700"
+                            style={{ animationDelay: `${index * 150}ms` }}
                         >
                             <div className="space-y-6">
                                 <div className="flex items-start md:items-center justify-between gap-4">

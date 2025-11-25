@@ -4,7 +4,7 @@ import Contact from '@/components/Contact';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
+    <div className="min-h-screen bg-black font-sans">
       <main className='min-h-screen w-full'>
         <Cover />
         <Portfolio />

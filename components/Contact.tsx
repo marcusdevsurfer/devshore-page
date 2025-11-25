@@ -10,7 +10,7 @@ const InstagramIcon = () => (
 
 export default function Contact() {
     return (
-        <section className="relative w-full bg-black pt-15 pb-20">
+        <section className="relative h-full w-full bg-black p-20 animate-in fade-in duration-1000">
             <div className="absolute z-0 w-full h-full top-0 left-0">
                 <LetterGlitch
                     glitchColors={["#5fa8f5", "#0961ed", "#16181c"]}
@@ -30,7 +30,7 @@ export default function Contact() {
                         href="https://instagram.com/dev.shore"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group hover:text-white transition-colors duration-300"
+                        className="group hover:text-white transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(95,168,245,0.5)]"
                         aria-label="Instagram"
                     >
                         <InstagramIcon />
