@@ -21,11 +21,12 @@ export default function Contact() {
                     characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789"
                 />
             </div>
-            <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[400px] gap-8">
-                <h2 className="text-2xl md:text-4xl text-gray-300">
+            <div className="relative z-1 w-full flex flex-col items-center justify-center min-h-[300px] gap-8">
+                <div className="absolute bg-black/70 rounded-full z-0 blur-2xl w-80 h-60 animate-pulse"></div>
+                <h2 className="text-2xl md:text-4xl text-gray-300 z-1">
                     {`Hey`}<span className="animate-pulse">_</span>
                 </h2>
-                <div className="flex items-center gap-8">
+                <div className="flex items-center gap-8 z-1">
                     <a
                         href="https://instagram.com/dev.shore"
                         target="_blank"
