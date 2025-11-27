@@ -26,7 +26,7 @@ export default function Portfolio() {
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
                         Proyectos
                     </h2>
-                    <div className="w-12 h-px bg-gray-700 mx-auto" />
+                    <div className="w-12 h-px bg-linear-to-r from-transparent via-gray-500 to-transparent mx-auto" />
                 </div>
                 <div className="max-w-3xl mx-auto">
                     {projects.map((project, index) => (
