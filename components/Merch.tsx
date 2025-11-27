@@ -7,7 +7,8 @@ const products = [
     {
         id: 1,
         name: "Playera Dev Shore - Pulpo Multitasking",
-        price: 350,
+        price: 300,
+        category: 'tshirt',
         images: {
             front: "/tshirt-front-1.png",
             back: "/design-back-1.png"
@@ -18,13 +19,26 @@ const products = [
     {
         id: 2,
         name: "Playera Dev Shore - Cangrejo Bitcoin Miner",
-        price: 350,
+        price: 300,
+        category: 'tshirt',
         images: {
             front: "/tshirt-front-1.png",
             back: "/design-back-2.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 99
+    },
+    {
+        id: 3,
+        name: "Termo Dev Shore",
+        price: 120,
+        category: 'accessory',
+        images: {
+            front: "/",
+            back: "/"
+        },
+        //sizes: ["S", "M", "L", "XL"],
+        stock: 20
     }
 ];
 
@@ -61,32 +75,31 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
                         <span className="text-[10px] text-gray-300 uppercase tracking-wider">{product.stock}</span>
                     </div>
 
-                    {/* Botones para cambiar vista */}
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                        <button
-                            onClick={() => setShowBack(false)}
-                            className={`backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-wider transition-all duration-300 ${!showBack
-                                ? 'bg-blue-500/30 border border-blue-400/50 text-white'
-                                : 'bg-black/30 border border-white/10 text-gray-400 hover:text-white'
-                                }`}
-                        >
-                            Frente
-                        </button>
-                        <button
-                            onClick={() => setShowBack(true)}
-                            className={`backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-wider transition-all duration-300 ${showBack
-                                ? 'bg-blue-500/30 border border-blue-400/50 text-white'
-                                : 'bg-black/30 border border-white/10 text-gray-400 hover:text-white'
-                                }`}
-                        >
-                            Atrás
-                        </button>
-                    </div>
+                    {
+                        product?.category === 'tshirt' &&
+                        < div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                            <button
+                                onClick={() => setShowBack(false)}
+                                className={`backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-wider transition-all duration-300 ${!showBack
+                                    ? 'bg-blue-500/30 border border-blue-400/50 text-white'
+                                    : 'bg-black/30 border border-white/10 text-gray-400 hover:text-white'
+                                    }`}
+                            >
+                                Frente
+                            </button>
+                            <button
+                                onClick={() => setShowBack(true)}
+                                className={`backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-wider transition-all duration-300 ${showBack
+                                    ? 'bg-blue-500/30 border border-blue-400/50 text-white'
+                                    : 'bg-black/30 border border-white/10 text-gray-400 hover:text-white'
+                                    }`}
+                            >
+                                Atrás
+                            </button>
+                        </div>
+                    }
                 </div>
-
-                {/* Info del producto */}
                 <div className="p-6 space-y-4">
-                    {/* Nombre y Precio */}
                     <div className="space-y-2">
                         <h3 className="text-base font-light text-gray-300 group-hover:text-white transition-colors duration-300">
                             {product.name}
@@ -99,36 +112,37 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
                         </div>
                     </div>
 
-                    {/* Tallas */}
-                    <div className="flex gap-1.5">
-                        {product.sizes.map((size) => (
-                            <span
-                                key={size}
-                                className="flex-1 text-center text-[10px] text-gray-400 backdrop-blur-sm bg-white/3 border border-white/5 hover:border-blue-500/30 py-1.5 transition-all duration-300"
-                            >
-                                {size}
-                            </span>
-                        ))}
-                    </div>
+                    {
+                        product?.category == 'tshirt' &&
+                        < div className="flex gap-1.5">
+                            {product.sizes.map((size) => (
+                                <span
+                                    key={size}
+                                    className="flex-1 text-center text-[10px] text-gray-400 backdrop-blur-sm bg-white/3 border border-white/5 hover:border-blue-500/30 py-1.5 transition-all duration-300"
+                                >
+                                    {size}
+                                </span>
+                            ))}
+                        </div>
+                    }
 
-                    {/* Botón de contacto */}
                     <a
                         href="https://instagram.com/dev.shore"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block w-full py-2.5 text-xs text-center text-gray-400 backdrop-blur-sm bg-white/2 border border-white/10 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/5 transition-all duration-300 uppercase tracking-wider"
                     >
-                        Contactar para comprar 
+                        Contactar para comprar
                     </a>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
 export default function Merch() {
     return (
-        <section className="relative w-full bg-black px-4 py-32">
+        <section className="relative w-full bg-black px-4 my-24">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
@@ -137,15 +151,15 @@ export default function Merch() {
                     <div className="w-12 h-px bg-linear-to-r from-transparent via-gray-500 to-transparent mx-auto" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto">
                     {products.map((product, index) => (
                         <ProductCard key={product.id} product={product} index={index} />
                     ))}
                 </div>
 
                 {/* Nota informativa */}
-                <div className="mt-16 text-center">
-                    <p className="text-xs text-gray-600 uppercase tracking-widest">Contacto vía redes sociales</p>
+                <div className="mt-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <p className="text-xs text-gray-400 uppercase tracking-widest hover:text-blue-100/90 hover:text-shadow-2xl hover:text-shadow-white transition-colors duration-700">Contacto vía redes sociales</p>
                 </div>
             </div>
         </section>
