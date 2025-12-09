@@ -27,18 +27,6 @@ const products = [
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 99
-    },
-    {
-        id: 3,
-        name: "Termo Dev Shore",
-        price: 120,
-        category: 'accessory',
-        images: {
-            front: "/",
-            back: "/"
-        },
-        //sizes: ["S", "M", "L", "XL"],
-        stock: 20
     }
 ];
 
@@ -47,7 +35,7 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
 
     return (
         <div
-            className="group rounded-xl relative mt-24 backdrop-blur-xl bg-white/2 border border-white/10 hover:border-blue-400/30 animate-in fade-in slide-in-from-bottom-8 duration-700 overflow-hidden"
+            className="group rounded-xl relative mt-10 backdrop-blur-xl bg-white/2 border border-white/10 hover:border-blue-400/30 animate-in fade-in slide-in-from-bottom-8 duration-700 overflow-hidden"
         >
             {/* Glow effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -142,11 +130,11 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
 
 export default function Merch() {
     return (
-        <section className="relative w-full bg-black px-4 my-24">
+        <section className="relative w-full bg-black px-4 my-16">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
-                        Merch
+                        Mercancía
                     </h2>
                     <div className="w-12 h-px bg-linear-to-r from-transparent via-gray-500 to-transparent mx-auto" />
                 </div>
