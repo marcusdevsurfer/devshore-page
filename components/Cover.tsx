@@ -14,9 +14,9 @@ export default function Cover() {
                 <TextType
                     className="text-gray-100 font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl drop-shadow-2xl animate-in fade-in duration-1500"
                     as="h1"
-                    text={["Innovación", "Transformación Digital", "Dev Shore"]}
-                    typingSpeed={75}
-                    pauseDuration={1500}
+                    text={["Innovación", "Transformación Digital", "Dev Shore..."]}
+                    typingSpeed={80}
+                    pauseDuration={600}
                     showCursor={true}
                     cursorCharacter="|"
                 />
