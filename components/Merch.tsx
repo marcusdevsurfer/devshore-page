@@ -29,8 +29,20 @@ const products = [
     //     stock: 99
     // },
     {
+        id: 2,
+        name: "Playera - Skull Waves",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/wavedev-front.png",
+            back: "/shirts/wavedev-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 25
+    },
+    {
         id: 3,
-        name: "Playera - Maniak Spider ",
+        name: "Playera - Maniak Spider",
         price: 320,
         category: 'tshirt',
         images: {
@@ -38,9 +50,9 @@ const products = [
             back: "/shirts/spider-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
-        stock: 99
+        stock: 25
     },
-     {
+    {
         id: 4,
         name: "Playera - Calamar Reef",
         price: 320,
@@ -50,7 +62,7 @@ const products = [
             back: "/shirts/calamar-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
-        stock: 99
+        stock: 25
     }
 ];
 
@@ -163,7 +175,7 @@ export default function Merch() {
                     <div className="w-12 h-px bg-linear-to-r from-transparent via-gray-500 to-transparent mx-auto" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-4xl mx-auto">
                     {products.map((product, index) => (
                         <ProductCard key={product.id} product={product} index={index} />
                     ))}
