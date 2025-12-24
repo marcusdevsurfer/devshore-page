@@ -4,38 +4,50 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const products = [
-    {
-        id: 1,
-        name: "Playera Dev Shore - Pulpo Multitasking",
-        price: 300,
-        category: 'tshirt',
-        images: {
-            front: "/tshirt-front-1.png",
-            back: "/design-back-1.png"
-        },
-        sizes: ["S", "M", "L", "XL"],
-        stock: 99
-    },
-    {
-        id: 2,
-        name: "Playera Dev Shore - Cangrejo Bitcoin Miner",
-        price: 300,
-        category: 'tshirt',
-        images: {
-            front: "/tshirt-front-1.png",
-            back: "/design-back-2.png"
-        },
-        sizes: ["S", "M", "L", "XL"],
-        stock: 99
-    },
+    // {
+    //     id: 1,
+    //     name: "Playera Dev Shore - Pulpo Multitasking",
+    //     price: 300,
+    //     category: 'tshirt',
+    //     images: {
+    //         front: "/tshirt-front-1.png",
+    //         back: "/design-back-1.png"
+    //     },
+    //     sizes: ["S", "M", "L", "XL"],
+    //     stock: 99
+    // },
+    // {
+    //     id: 2,
+    //     name: "Playera Dev Shore - Cangrejo Bitcoin Miner",
+    //     price: 300,
+    //     category: 'tshirt',
+    //     images: {
+    //         front: "/tshirt-front-1.png",
+    //         back: "/design-back-2.png"
+    //     },
+    //     sizes: ["S", "M", "L", "XL"],
+    //     stock: 99
+    // },
     {
         id: 3,
-        name: "Playera Dev Shore - Maniak Spider ",
-        price: 300,
+        name: "Playera - Maniak Spider ",
+        price: 320,
         category: 'tshirt',
         images: {
             front: "/shirts/spider-front.png",
             back: "/shirts/spider-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 99
+    },
+     {
+        id: 4,
+        name: "Playera - Calamar Reef",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/calamar-front.png",
+            back: "/shirts/calamar-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 99
