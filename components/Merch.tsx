@@ -29,6 +29,18 @@ const products = [
     //     stock: 99
     // },
     {
+        id: 1,
+        name: "Playera - Reef Tech",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/reef-front.png",
+            back: "/shirts/reef-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 25
+    },
+    {
         id: 2,
         name: "Playera - Skull Waves",
         price: 320,
@@ -53,6 +65,18 @@ const products = [
         stock: 25
     },
     {
+        id: 6,
+        name: "Playera - Skull Waves",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/wavedev-white-front.png",
+            back: "/shirts/wavedev-white-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 25
+    },
+    {
         id: 4,
         name: "Playera - Calamar Reef",
         price: 320,
@@ -60,6 +84,18 @@ const products = [
         images: {
             front: "/shirts/calamar-front.png",
             back: "/shirts/calamar-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 25
+    },
+    {
+        id: 5,
+        name: "Playera - Whale Reef",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/whale-front.png",
+            back: "/shirts/whale-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 25
