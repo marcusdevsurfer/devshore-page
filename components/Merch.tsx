@@ -27,6 +27,18 @@ const products = [
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 99
+    },
+    {
+        id: 3,
+        name: "Playera Dev Shore - Maniak Spider ",
+        price: 300,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/spider-front.png",
+            back: "/shirts/spider-back.png"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 99
     }
 ];
 
