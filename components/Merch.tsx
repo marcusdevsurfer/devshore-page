@@ -107,7 +107,7 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
 
     return (
         <div
-            className="group rounded-xl relative mt-10 backdrop-blur-xl bg-white/2 border border-white/10 hover:border-blue-400/30 animate-in fade-in slide-in-from-bottom-8 duration-700 overflow-hidden"
+            className="group rounded-xl relative mt-10 backdrop-blur-xl bg-white/2 border border-white/10 hover:border-blue-400/30 animate-in fade-in duration-700 overflow-hidden"
         >
             {/* Glow effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -117,7 +117,7 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
             <div className="relative">
                 {/* Imagen del producto */}
                 <div className="relative aspect-square bg-linear-to-br from-gray-900/20 to-black/50 overflow-hidden p-8 flex items-center justify-center">
-                    <div className="relative w-4/5 h-4/5">
+                    <div className="relative w-4/5 h-4/5 animate-in">
                         <Image
                             src={showBack ? product.images.back : product.images.front}
                             alt={product.name}
@@ -166,7 +166,7 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
                         </h3>
                         <div className="flex items-baseline gap-1.5">
                             <span className="text-2xl font-light text-white">
-                                ${product.price}
+                                ${product.price}.00
                             </span>
                             <span className="text-xs text-gray-600">MXN</span>
                         </div>
