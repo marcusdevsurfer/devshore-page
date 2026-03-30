@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 
 const products = [
     {
@@ -78,8 +78,10 @@ const products = [
     }
 ];
 
-function ProductCard({ product }: { product: typeof products[0], index: number }) {
+function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrder: (product: typeof products[0], size: string) => void }) {
     const [showBack, setShowBack] = useState(false);
+    const [selectedSize, setSelectedSize] = useState('');
+    const [sizeError, setSizeError] = useState(false);
 
     return (
         <div
@@ -150,33 +152,192 @@ function ProductCard({ product }: { product: typeof products[0], index: number }
 
                     {
                         product?.category == 'tshirt' &&
-                        < div className="flex gap-1.5">
-                            {product.sizes.map((size) => (
-                                <span
-                                    key={size}
-                                    className="flex-1 text-center text-[10px] text-gray-400 backdrop-blur-sm bg-white/3 border border-white/5 hover:border-blue-500/30 py-1.5 transition-all duration-300"
-                                >
-                                    {size}
-                                </span>
-                            ))}
+                        <div className="space-y-1">
+                            <div className="flex gap-1.5">
+                                {product.sizes.map((size) => (
+                                    <button
+                                        key={size}
+                                        type="button"
+                                        onClick={() => { setSelectedSize(size === selectedSize ? '' : size); setSizeError(false); }}
+                                        className={`flex-1 text-center text-[10px] backdrop-blur-sm border py-1.5 transition-all duration-300 ${
+                                            selectedSize === size
+                                                ? 'bg-blue-500/20 border-blue-400/60 text-white'
+                                                : 'text-gray-400 bg-white/3 border-white/5 hover:border-blue-500/30 hover:text-white'
+                                        }`}
+                                    >
+                                        {size}
+                                    </button>
+                                ))}
+                            </div>
+                            {sizeError && <p className="text-[10px] text-red-400 mt-0.5">Selecciona una talla</p>}
                         </div>
                     }
 
-                    <a
-                        href="https://instagram.com/dev.shore"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <button
+                        type="button"
+                        onClick={() => {
+                            if (!selectedSize && product.category === 'tshirt') {
+                                setSizeError(true);
+                                return;
+                            }
+                            onOrder(product, selectedSize);
+                        }}
                         className="block w-full py-2.5 text-xs text-center text-gray-400 backdrop-blur-sm bg-white/2 border border-white/10 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/5 transition-all duration-300 uppercase tracking-wider"
                     >
-                        Contactar para comprar
-                    </a>
+                        Hacer Pedido
+                    </button>
                 </div>
             </div>
         </div >
     );
 }
 
+function OrderModal({ product, size, onClose }: { product: typeof products[0]; size: string; onClose: () => void }) {
+    const [form, setForm] = useState({ nombre: '', email: '', telefono: '', cantidad: '1', notas: '' });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        try {
+            const res = await fetch('/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nombre: form.nombre,
+                    email: form.email,
+                    telefono: form.telefono,
+                    cantidad: form.cantidad,
+                    notas: form.notas,
+                    producto: product.name,
+                    talla: size,
+                    precio: product.price,
+                }),
+            });
+            if (!res.ok) throw new Error('Error');
+            setSuccess(true);
+        } catch {
+            setError('Ocurrió un error. Por favor intenta de nuevo.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <div
+                className="relative w-full max-w-md bg-black border border-white/10 p-8 animate-in fade-in slide-in-from-bottom-4 duration-300"
+                onClick={e => e.stopPropagation()}
+            >
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors text-sm leading-none"
+                >
+                    ✕
+                </button>
+
+                {success ? (
+                    <div className="text-center py-8 space-y-4">
+                        <div className="text-green-400 text-5xl font-thin">✓</div>
+                        <h3 className="text-white font-light text-xl">¡Pedido registrado!</h3>
+                        <p className="text-gray-400 text-sm">
+                            Nos pondremos en contacto contigo pronto para coordinar tu pedido.
+                        </p>
+                        <button
+                            onClick={onClose}
+                            className="mt-4 px-6 py-2.5 text-xs uppercase tracking-wider border border-white/10 text-gray-300 hover:text-white hover:border-blue-500/50 transition-all duration-300"
+                        >
+                            Cerrar
+                        </button>
+                    </div>
+                ) : (
+                    <>
+                        <div className="mb-6 pb-4 border-b border-white/5">
+                            <h3 className="text-white font-light text-lg mb-1">Hacer Pedido</h3>
+                            <p className="text-gray-500 text-xs uppercase tracking-wider">
+                                {product.name}{size ? ` / Talla ${size}` : ''} — ${product.price} MXN
+                            </p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-[10px] uppercase tracking-wider text-gray-500 mb-1.5">Nombre *</label>
+                                <input
+                                    required
+                                    value={form.nombre}
+                                    onChange={e => setForm(f => ({ ...f, nombre: e.target.value }))}
+                                    className="w-full bg-white/3 border border-white/10 px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                                    placeholder="Tu nombre completo"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] uppercase tracking-wider text-gray-500 mb-1.5">Email *</label>
+                                <input
+                                    required
+                                    type="email"
+                                    value={form.email}
+                                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                                    className="w-full bg-white/3 border border-white/10 px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                                    placeholder="correo@ejemplo.com"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] uppercase tracking-wider text-gray-500 mb-1.5">Teléfono *</label>
+                                <input
+                                    required
+                                    type="tel"
+                                    value={form.telefono}
+                                    onChange={e => setForm(f => ({ ...f, telefono: e.target.value }))}
+                                    className="w-full bg-white/3 border border-white/10 px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                                    placeholder="10 dígitos"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] uppercase tracking-wider text-gray-500 mb-1.5">Cantidad</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    max="10"
+                                    value={form.cantidad}
+                                    onChange={e => setForm(f => ({ ...f, cantidad: e.target.value }))}
+                                    className="w-full bg-white/3 border border-white/10 px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-colors"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] uppercase tracking-wider text-gray-500 mb-1.5">Notas adicionales</label>
+                                <textarea
+                                    value={form.notas}
+                                    onChange={e => setForm(f => ({ ...f, notas: e.target.value }))}
+                                    rows={3}
+                                    className="w-full bg-white/3 border border-white/10 px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                                    placeholder="Instrucciones especiales, preguntas..."
+                                />
+                            </div>
+                            {error && <p className="text-red-400 text-xs">{error}</p>}
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full py-3 text-xs uppercase tracking-wider text-white bg-blue-500/10 border border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? 'Enviando...' : 'Confirmar Pedido →'}
+                            </button>
+                        </form>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
 export default function Merch() {
+    const [orderTarget, setOrderTarget] = useState<{ product: typeof products[0]; size: string } | null>(null);
+
     return (
         <section className="relative w-full bg-black px-4 my-16">
             <div className="max-w-6xl mx-auto">
@@ -188,8 +349,12 @@ export default function Merch() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-4xl mx-auto">
-                    {products.map((product, index) => (
-                        <ProductCard key={product.id} product={product} index={index} />
+                    {products.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onOrder={(p, s) => setOrderTarget({ product: p, size: s })}
+                        />
                     ))}
                 </div>
 
@@ -198,6 +363,14 @@ export default function Merch() {
                     <p className="text-xs text-gray-400 uppercase tracking-widest hover:text-blue-100/90 hover:text-shadow-2xl hover:text-shadow-white transition-colors duration-700">Contacto vía redes sociales</p>
                 </div>
             </div>
+
+            {orderTarget && (
+                <OrderModal
+                    product={orderTarget.product}
+                    size={orderTarget.size}
+                    onClose={() => setOrderTarget(null)}
+                />
+            )}
         </section>
     );
 }
