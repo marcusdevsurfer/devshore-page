@@ -4,30 +4,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const products = [
-    // {
-    //     id: 1,
-    //     name: "Playera Dev Shore - Pulpo Multitasking",
-    //     price: 300,
-    //     category: 'tshirt',
-    //     images: {
-    //         front: "/tshirt-front-1.png",
-    //         back: "/design-back-1.png"
-    //     },
-    //     sizes: ["S", "M", "L", "XL"],
-    //     stock: 99
-    // },
-    // {
-    //     id: 2,
-    //     name: "Playera Dev Shore - Cangrejo Bitcoin Miner",
-    //     price: 300,
-    //     category: 'tshirt',
-    //     images: {
-    //         front: "/tshirt-front-1.png",
-    //         back: "/design-back-2.png"
-    //     },
-    //     sizes: ["S", "M", "L", "XL"],
-    //     stock: 99
-    // },
     {
         id: 1,
         name: "Playera - Reef Tech",
@@ -78,24 +54,24 @@ const products = [
     },
     {
         id: 4,
-        name: "Playera - Calamar Reef",
+        name: "Sea Connection",
         price: 320,
         category: 'tshirt',
         images: {
-            front: "/shirts/calamar-front.png",
-            back: "/shirts/calamar-back.png"
+            front: "/shirts/seaconnection-front.png",
+            back: "/shirts/seaconnection-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 25
     },
     {
         id: 5,
-        name: "Playera - Whale Reef",
+        name: "Rest In Surf",
         price: 320,
         category: 'tshirt',
         images: {
-            front: "/shirts/whale-front.png",
-            back: "/shirts/whale-back.png"
+            front: "/shirts/restinsurf-front.png",
+            back: "/shirts/restinsurf-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 25
