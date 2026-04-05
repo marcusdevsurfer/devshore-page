@@ -118,6 +118,18 @@ const products: Product[] = [
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 25
+    },
+     {
+        id: 6,
+        name: "Mermaid Tech",
+        price: 320,
+        category: 'tshirt',
+        images: {
+            front: "/shirts/mermaid-front.webp",
+            back: "/shirts/mermaid-back.webp"
+        },
+        sizes: ["S", "M", "L", "XL"],
+        stock: 25
     }
 ];
 
