@@ -3,7 +3,30 @@
 import Image from 'next/image';
 import { useState, FormEvent } from 'react';
 
-const products = [
+type ProductImages = {
+    front: string;
+    back: string;
+};
+
+type ProductVariant = {
+    id: 'black' | 'white';
+    label: 'Negra' | 'Blanca';
+    swatchClassName: string;
+    images: ProductImages;
+};
+
+type Product = {
+    id: number;
+    name: string;
+    price: number;
+    category: 'tshirt';
+    images?: ProductImages;
+    variants?: ProductVariant[];
+    sizes: string[];
+    stock: number;
+};
+
+const products: Product[] = [
     {
         id: 1,
         name: "Playera - Reef Tech",
@@ -21,10 +44,26 @@ const products = [
         name: "Playera - Skull Waves",
         price: 320,
         category: 'tshirt',
-        images: {
-            front: "/shirts/wavedev-front.png",
-            back: "/shirts/wavedev-back.png"
-        },
+        variants: [
+            {
+                id: 'black',
+                label: 'Negra',
+                swatchClassName: 'bg-neutral-950',
+                images: {
+                    front: "/shirts/wavedev-front.png",
+                    back: "/shirts/wavedev-back.png"
+                }
+            },
+            {
+                id: 'white',
+                label: 'Blanca',
+                swatchClassName: 'bg-white',
+                images: {
+                    front: "/shirts/wavedev-white-front.png",
+                    back: "/shirts/wavedev-white-back.png"
+                }
+            }
+        ],
         sizes: ["S", "M", "L", "XL"],
         stock: 25
     },
@@ -36,18 +75,6 @@ const products = [
         images: {
             front: "/shirts/spider-front.png",
             back: "/shirts/spider-back.png"
-        },
-        sizes: ["S", "M", "L", "XL"],
-        stock: 25
-    },
-    {
-        id: 6,
-        name: "Playera - Skull Waves",
-        price: 320,
-        category: 'tshirt',
-        images: {
-            front: "/shirts/wavedev-white-front.png",
-            back: "/shirts/wavedev-white-back.png"
         },
         sizes: ["S", "M", "L", "XL"],
         stock: 25
@@ -78,10 +105,22 @@ const products = [
     }
 ];
 
-function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrder: (product: typeof products[0], size: string) => void }) {
+function getActiveImages(product: Product, selectedVariant: ProductVariant['id'] | null) {
+    if (product.variants?.length) {
+        return product.variants.find((variant) => variant.id === selectedVariant)?.images ?? product.variants[0].images;
+    }
+
+    return product.images!;
+}
+
+function ProductCard({ product, onOrder }: { product: Product; onOrder: (product: Product, size: string, variant: ProductVariant['label'] | null) => void }) {
     const [showBack, setShowBack] = useState(false);
     const [selectedSize, setSelectedSize] = useState('');
     const [sizeError, setSizeError] = useState(false);
+    const [selectedVariant, setSelectedVariant] = useState<ProductVariant['id'] | null>(product.variants?.[0]?.id ?? null);
+
+    const activeImages = getActiveImages(product, selectedVariant);
+    const selectedVariantLabel = product.variants?.find((variant) => variant.id === selectedVariant)?.label ?? null;
 
     return (
         <div
@@ -97,7 +136,7 @@ function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrde
                 <div className="relative aspect-square bg-linear-to-br from-gray-900/20 to-black/50 overflow-hidden p-8 flex items-center justify-center">
                     <div className="relative w-4/5 h-4/5 animate-in">
                         <Image
-                            src={showBack ? product.images.back : product.images.front}
+                            src={showBack ? activeImages.back : activeImages.front}
                             alt={product.name}
                             width={500}
                             height={500}
@@ -115,7 +154,7 @@ function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrde
 
                     {
                         product?.category === 'tshirt' &&
-                        < div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                             <button
                                 onClick={() => setShowBack(false)}
                                 className={`backdrop-blur-md px-3 py-1.5 text-[10px] uppercase tracking-wider transition-all duration-300 ${!showBack
@@ -142,6 +181,34 @@ function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrde
                         <h3 className="text-base font-light text-gray-300 group-hover:text-white transition-colors duration-300">
                             {product.name}
                         </h3>
+                        {product.variants?.length ? (
+                            <div className="flex items-center gap-2">
+                                {product.variants.map((variant) => (
+                                    <button
+                                        key={variant.id}
+                                        type="button"
+                                        aria-label={`Seleccionar playera ${variant.label.toLowerCase()}`}
+                                        title={variant.label}
+                                        onClick={() => {
+                                            setSelectedVariant(variant.id);
+                                            setShowBack(false);
+                                        }}
+                                        className={`flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${
+                                            selectedVariant === variant.id
+                                                ? 'scale-110 border-blue-400/70 bg-blue-500/10 shadow-[0_0_0_3px_rgba(59,130,246,0.15)]'
+                                                : 'border-white/15 bg-white/5 hover:border-blue-500/40 hover:bg-white/10'
+                                        }`}
+                                    >
+                                        <span
+                                            className={`h-4 w-4 rounded-full border ${variant.id === 'white' ? 'border-neutral-300' : 'border-white/10'} ${variant.swatchClassName}`}
+                                        />
+                                    </button>
+                                ))}
+                                <span className="text-[10px] uppercase tracking-[0.25em] text-gray-500">
+                                    {selectedVariantLabel}
+                                </span>
+                            </div>
+                        ) : null}
                         <div className="flex items-baseline gap-1.5">
                             <span className="text-2xl font-light text-white">
                                 ${product.price}.00
@@ -180,7 +247,7 @@ function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrde
                                 setSizeError(true);
                                 return;
                             }
-                            onOrder(product, selectedSize);
+                            onOrder(product, selectedSize, selectedVariantLabel);
                         }}
                         className="block w-full py-2.5 text-xs text-center text-gray-400 backdrop-blur-sm bg-white/2 border border-white/10 hover:border-blue-500/50 hover:text-white hover:bg-blue-500/5 transition-all duration-300 uppercase tracking-wider"
                     >
@@ -192,7 +259,7 @@ function ProductCard({ product, onOrder }: { product: typeof products[0]; onOrde
     );
 }
 
-function OrderModal({ product, size, onClose }: { product: typeof products[0]; size: string; onClose: () => void }) {
+function OrderModal({ product, size, variant, onClose }: { product: Product; size: string; variant: ProductVariant['label'] | null; onClose: () => void }) {
     const [form, setForm] = useState({ nombre: '', email: '', telefono: '', cantidad: '1', notas: '' });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -212,7 +279,7 @@ function OrderModal({ product, size, onClose }: { product: typeof products[0]; s
                     telefono: form.telefono,
                     cantidad: form.cantidad,
                     notas: form.notas,
-                    producto: product.name,
+                    producto: variant ? `${product.name} - ${variant}` : product.name,
                     talla: size,
                     precio: product.price,
                 }),
@@ -261,7 +328,7 @@ function OrderModal({ product, size, onClose }: { product: typeof products[0]; s
                         <div className="mb-6 pb-4 border-b border-white/5">
                             <h3 className="text-white font-light text-lg mb-1">Hacer Pedido</h3>
                             <p className="text-gray-500 text-xs uppercase tracking-wider">
-                                {product.name}{size ? ` / Talla ${size}` : ''} — ${product.price} MXN
+                                {product.name}{variant ? ` / ${variant}` : ''}{size ? ` / Talla ${size}` : ''} — ${product.price} MXN
                             </p>
                         </div>
 
@@ -336,7 +403,7 @@ function OrderModal({ product, size, onClose }: { product: typeof products[0]; s
 }
 
 export default function Merch() {
-    const [orderTarget, setOrderTarget] = useState<{ product: typeof products[0]; size: string } | null>(null);
+    const [orderTarget, setOrderTarget] = useState<{ product: Product; size: string; variant: ProductVariant['label'] | null } | null>(null);
 
     return (
         <section className="relative w-full bg-black px-4 my-16">
@@ -353,7 +420,7 @@ export default function Merch() {
                         <ProductCard
                             key={product.id}
                             product={product}
-                            onOrder={(p, s) => setOrderTarget({ product: p, size: s })}
+                            onOrder={(p, s, v) => setOrderTarget({ product: p, size: s, variant: v })}
                         />
                     ))}
                 </div>
@@ -368,6 +435,7 @@ export default function Merch() {
                 <OrderModal
                     product={orderTarget.product}
                     size={orderTarget.size}
+                    variant={orderTarget.variant}
                     onClose={() => setOrderTarget(null)}
                 />
             )}
