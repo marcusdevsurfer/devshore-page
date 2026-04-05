@@ -72,10 +72,26 @@ const products: Product[] = [
         name: "Playera - Maniak Spider",
         price: 320,
         category: 'tshirt',
-        images: {
-            front: "/shirts/spider-front.png",
-            back: "/shirts/spider-back.png"
-        },
+        variants: [
+            {
+                id: 'black',
+                label: 'Negra',
+                swatchClassName: 'bg-neutral-950',
+                images: {
+                    front: "/shirts/spider-front.png",
+                    back: "/shirts/spider-back.png"
+                }
+            },
+            {
+                id: 'white',
+                label: 'Blanca',
+                swatchClassName: 'bg-white',
+                images: {
+                    front: "/shirts/spider-white-front.png",
+                    back: "/shirts/spider-white-back.png"
+                }
+            }
+        ],
         sizes: ["S", "M", "L", "XL"],
         stock: 25
     },
