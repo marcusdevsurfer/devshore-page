@@ -422,7 +422,7 @@ export default function Merch() {
     const [orderTarget, setOrderTarget] = useState<{ product: Product; size: string; variant: ProductVariant['label'] | null } | null>(null);
 
     return (
-        <section className="relative w-full bg-black px-4 my-16">
+        <section id="merch" className="relative w-full bg-black px-4 my-16">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <h2 className="text-4xl md:text-5xl font-light text-gray-200 mb-3">
