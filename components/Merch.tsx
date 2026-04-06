@@ -242,8 +242,8 @@ function ProductCard({ product, onOrder }: { product: Product; onOrder: (product
                                             setShowBack(false);
                                         }}
                                         className={`flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${selectedVariant === variant.id
-                                                ? 'scale-110 border-blue-400/70 bg-blue-500/10 shadow-[0_0_0_3px_rgba(59,130,246,0.15)]'
-                                                : 'border-white/15 bg-white/5 hover:border-blue-500/40 hover:bg-white/10'
+                                            ? 'scale-110 border-blue-400/70 bg-blue-500/10 shadow-[0_0_0_3px_rgba(59,130,246,0.15)]'
+                                            : 'border-white/15 bg-white/5 hover:border-blue-500/40 hover:bg-white/10'
                                             }`}
                                     >
                                         <span
@@ -274,8 +274,8 @@ function ProductCard({ product, onOrder }: { product: Product; onOrder: (product
                                         type="button"
                                         onClick={() => { setSelectedSize(size === selectedSize ? '' : size); setSizeError(false); }}
                                         className={`flex-1 text-center text-[10px] backdrop-blur-sm border py-1.5 transition-all duration-300 ${selectedSize === size
-                                                ? 'bg-blue-500/20 border-blue-400/60 text-white'
-                                                : 'text-gray-400 bg-white/3 border-white/5 hover:border-blue-500/30 hover:text-white'
+                                            ? 'bg-blue-500/20 border-blue-400/60 text-white'
+                                            : 'text-gray-400 bg-white/3 border-white/5 hover:border-blue-500/30 hover:text-white'
                                             }`}
                                     >
                                         {size}
