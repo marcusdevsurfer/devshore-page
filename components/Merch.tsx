@@ -9,8 +9,8 @@ type ProductImages = {
 };
 
 type ProductVariant = {
-    id: 'black' | 'white';
-    label: 'Negra' | 'Blanca';
+    id: 'black' | 'white' | 'blackk';
+    label: string;
     swatchClassName: string;
     images: ProductImages;
 };
@@ -100,10 +100,30 @@ const products: Product[] = [
         name: "Sea Connection",
         price: 320,
         category: 'tshirt',
-        images: {
-            front: "/shirts/seaconnection-front.png",
-            back: "/shirts/seaconnection-back.png"
-        },
+        // images: {
+        //     front: "/shirts/seaconnection-front.png",
+        //     back: "/shirts/seaconnection-back.png"
+        // },
+        variants: [
+            {
+                id: 'black',
+                label: 'Negra / Azul',
+                swatchClassName: 'bg-blue-950',
+                images: {
+                    front: "/shirts/seaconnection-blue-front.webp",
+                    back: "/shirts/seaconnection-blue-back.webp"
+                }
+            },
+            {
+                id: 'blackk',
+                label: 'Negra / Verde',
+                swatchClassName: 'bg-green-950',
+                images: {
+                    front: "/shirts/seaconnection-green-front.webp",
+                    back: "/shirts/seaconnection-green-back.webp"
+                }
+            }
+        ],
         sizes: ["S", "M", "L", "XL"],
         stock: 25
     },
@@ -119,7 +139,7 @@ const products: Product[] = [
         sizes: ["S", "M", "L", "XL"],
         stock: 25
     },
-     {
+    {
         id: 6,
         name: "Mermaid Tech",
         price: 320,
@@ -221,11 +241,10 @@ function ProductCard({ product, onOrder }: { product: Product; onOrder: (product
                                             setSelectedVariant(variant.id);
                                             setShowBack(false);
                                         }}
-                                        className={`flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${
-                                            selectedVariant === variant.id
+                                        className={`flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${selectedVariant === variant.id
                                                 ? 'scale-110 border-blue-400/70 bg-blue-500/10 shadow-[0_0_0_3px_rgba(59,130,246,0.15)]'
                                                 : 'border-white/15 bg-white/5 hover:border-blue-500/40 hover:bg-white/10'
-                                        }`}
+                                            }`}
                                     >
                                         <span
                                             className={`h-4 w-4 rounded-full border ${variant.id === 'white' ? 'border-neutral-300' : 'border-white/10'} ${variant.swatchClassName}`}
@@ -254,11 +273,10 @@ function ProductCard({ product, onOrder }: { product: Product; onOrder: (product
                                         key={size}
                                         type="button"
                                         onClick={() => { setSelectedSize(size === selectedSize ? '' : size); setSizeError(false); }}
-                                        className={`flex-1 text-center text-[10px] backdrop-blur-sm border py-1.5 transition-all duration-300 ${
-                                            selectedSize === size
+                                        className={`flex-1 text-center text-[10px] backdrop-blur-sm border py-1.5 transition-all duration-300 ${selectedSize === size
                                                 ? 'bg-blue-500/20 border-blue-400/60 text-white'
                                                 : 'text-gray-400 bg-white/3 border-white/5 hover:border-blue-500/30 hover:text-white'
-                                        }`}
+                                            }`}
                                     >
                                         {size}
                                     </button>
