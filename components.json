@@ -10,12 +10,14 @@
     "cssVariables": false,
     "prefix": ""
   },
+  "iconLibrary": "radix",
   "aliases": {
     "components": "@/components",
     "utils": "@/lib",
     "lib": "@/lib"
   },
   "registries": {
-    "@react-bits": "https://reactbits.dev/r/{name}.json"
+    "@react-bits": "https://reactbits.dev/r/{name}.json",
+    "@scrollxui": "https://www.scrollxui.dev/registry/{name}.json"
   }
 }

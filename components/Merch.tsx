@@ -2,6 +2,12 @@
 
 import Image from 'next/image';
 import { useState, FormEvent } from 'react';
+import {
+    CardFlip,
+    CardFlipFront,
+    CardFlipBack,
+    CardFlipContent,
+} from '@/components/ui/card-flip';
 
 type ProductImages = {
     front: string;
@@ -182,15 +188,36 @@ function ProductCard({ product, onOrder }: { product: Product; onOrder: (product
             <div className="relative">
                 {/* Imagen del producto */}
                 <div className="relative aspect-square bg-linear-to-br from-gray-900/20 to-black/50 overflow-hidden p-8 flex items-center justify-center">
-                    <div className="relative w-4/5 h-4/5 animate-in">
-                        <Image
-                            src={showBack ? activeImages.back : activeImages.front}
-                            alt={product.name}
-                            width={500}
-                            height={500}
-                            className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(95,168,245,0.5)]  group-hover:drop-shadow-[0_10px_15px_rgba(95,168,245,0.5)]"
-                        />
-                    </div>
+                    <CardFlip
+                        className="w-4/5 h-4/5 animate-in"
+                        isFlipped={showBack}
+                        onFlipChange={setShowBack}
+                        showButtons={false}
+                    >
+                        <CardFlipFront className="border-0 bg-transparent py-0 shadow-none">
+                            <CardFlipContent className="px-0">
+                                <Image
+                                    src={activeImages.front}
+                                    alt={`${product.name} frente`}
+                                    width={500}
+                                    height={500}
+                                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(95,168,245,0.5)] group-hover:drop-shadow-[0_10px_15px_rgba(95,168,245,0.5)]"
+                                />
+                            </CardFlipContent>
+                        </CardFlipFront>
+
+                        <CardFlipBack className="border-0 bg-transparent py-0 shadow-none">
+                            <CardFlipContent className="px-0">
+                                <Image
+                                    src={activeImages.back}
+                                    alt={`${product.name} atras`}
+                                    width={500}
+                                    height={500}
+                                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100 drop-shadow-[0_0_10px_rgba(95,168,245,0.5)] group-hover:drop-shadow-[0_10px_15px_rgba(95,168,245,0.5)]"
+                                />
+                            </CardFlipContent>
+                        </CardFlipBack>
+                    </CardFlip>
                     {/* Overlay gradient */}
                     <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -476,6 +503,8 @@ export default function Merch() {
                     <p className="text-xs text-gray-400 uppercase tracking-widest hover:text-blue-100/90 hover:text-shadow-2xl hover:text-shadow-white transition-colors duration-700">Contacto vía redes sociales</p>
                 </div>
             </div>
+
+
 
             {orderTarget && (
                 <OrderModal
